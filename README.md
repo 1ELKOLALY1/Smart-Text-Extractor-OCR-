@@ -92,10 +92,6 @@ The tool generates:
 
 Contributions are welcome! Please feel free to submit a Pull Request or open an issue to report bugs or suggest features.
 
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## 📧 Contact & Support
 
 For questions, suggestions, or issues, please open a GitHub issue in the repository.
