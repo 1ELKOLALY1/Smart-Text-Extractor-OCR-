@@ -1,0 +1,64 @@
+{
+  "ocr": {
+    "language": "en",
+    "use_gpu": true,
+    "use_textline_orientation": false,
+    "use_doc_orientation_classify": false,
+    "use_doc_unwarping": false,
+    "enable_mkldnn": false
+  },
+  "processing": {
+    "supported_formats": [".png", ".jpg", ".jpeg", ".tiff", ".tif", ".bmp", ".webp"],
+    "output_directory": "ocr_results",
+    "sort_by": "filename",
+    "timeout_seconds": 300,
+    "max_workers": null
+  },
+  "extraction": {
+    "invoice_number_patterns": [
+      "invoice\\s*#?\\s*:?\\s*([A-Z0-9\\-]+)",
+      "inv\\s*#?\\s*:?\\s*([A-Z0-9\\-]+)",
+      "#\\s*([A-Z0-9\\-]{4,})"
+    ],
+    "date_patterns": [
+      "\\b(\\d{1,2}[\\/\\-\\.]\\d{1,2}[\\/\\-\\.]\\d{2,4})\\b",
+      "\\b(\\d{4}[\\/\\-\\.]\\d{1,2}[\\/\\-\\.]\\d{1,2})\\b"
+    ],
+    "total_labeled_pattern": "(?:total|amount\\s+due|balance\\s+due|grand\\s+total)[\\s\\S]*?\\$?\\s*([\\d,]+\\.\\d{2})",
+    "total_bare_amount_pattern": "\\b\\d[\\d,]*\\.\\d{2}\\b",
+    "total_max_threshold": 1000000.0
+  },
+  "currency": {
+    "symbols": ["$", "€", "£", "¥", "₹", "₽"],
+    "default_currency": "USD",
+    "decimal_separator": ".",
+    "thousands_separator": ","
+  },
+  "output": {
+    "formats": ["csv", "json", "txt"],
+    "csv_fields": [
+      "filename",
+      "invoice_number",
+      "date",
+      "total",
+      "currency",
+      "status",
+      "error",
+      "txt_file"
+    ],
+    "json_compact": true,
+    "include_raw_text": false
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "process.log",
+    "console_output": true,
+    "suppress_library_warnings": true
+  },
+  "validation": {
+    "min_invoice_number_length": 1,
+    "require_date": false,
+    "require_total": false,
+    "validate_file_size_mb": 50
+  }
+}
